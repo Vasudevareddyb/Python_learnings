@@ -1,0 +1,18 @@
+import re
+
+input_string = '''In the bustling bustling city city of New York, New York, the the bright bright lights lights and and the the constant constant hum hum of of activity activity create create an an atmosphere atmosphere that that is is both both exhilarating exhilarating and and exhausting exhausting.'''
+
+
+def remove_consecutive_duplicates(input_string):
+    unique_string = re.sub(r'\b(\w+)\s+\1\b', r'\1', input_string)
+    unique_string = re.sub(r'\bNew York, New York\b', 'New York', unique_string)
+    Additional_string = re.sub(
+    r'In the (bustling) city of (New York), the (bright lights) and the (constant hum) of activity create an atmosphere that is both (exhilarating) and (exhausting)\.',
+    r'The \1 city \3 and the \4 create an atmosphere that is both \5 and \6 in \2.',
+    unique_string)
+    final_string = unique_string + Additional_string
+    return final_string
+
+
+output_string = remove_consecutive_duplicates(input_string)
+print(output_string)
